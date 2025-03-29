@@ -18,7 +18,7 @@ function checkErrors() {
     
     errorOutput.innerText = "Checking for errors...";
     
-    fetch("https://your-backend-api.com/check-errors", {
+    fetch("http://localhost:8081/api/detect-error", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

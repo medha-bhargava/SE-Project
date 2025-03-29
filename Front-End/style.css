@@ -5,6 +5,7 @@ body {
     height: 100vh;
     background: linear-gradient(to bottom, #FFD3A5, #A2D2FF);
     /* background: linear-gradient(to bottom, #B0E0E6, #D8BFD8); */
+    /* background: linear-gradient(to bottom right, #0078D4, #9b4dff, #ff4b6e); */
     background-repeat: no-repeat;
 }
 .container{
@@ -43,14 +44,19 @@ textarea {
 button {
     width: 50%;
     border: none;
-    border-radius: 20px;
+    border-radius: 60px;
     margin-top: 15px;
     padding: 14px;
-    background: linear-gradient(to bottom right, rgb(117, 211, 248), rgb(255, 173, 186));
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    background: linear-gradient(to bottom right, #4dabf2, #b589ef, #ed8ca0);
+    /* background: linear-gradient(to bottom right, rgb(117, 211, 248), rgb(255, 173, 186)); */
 }
 button:hover {
     cursor: pointer;
-    filter: brightness(1.06);
+    filter: brightness(1.08);
+    transition: 0.4s;
 }
 #error {
     margin-top: 15px;
