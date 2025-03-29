@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Error Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Code Error Detection</h1>
+        <label for="language">Select Language:</label>
+        <select id="language">
+            <option value="select" selected disabled>Language</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+        </select>
+        <label for="insertCode">Insert Code:</label>
+        <textarea id="insertCode" placeholder="Write your code here..."></textarea>
+        <button>Detect Errors</button>
+        <div class="error"></div>
+    </div>
+</body>
+</html>
