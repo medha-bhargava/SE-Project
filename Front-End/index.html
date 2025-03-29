@@ -12,15 +12,15 @@
         <h1>Code Error Detection</h1>
         <label for="language">Select Language:</label>
         <select id="language">
-            <option value="select" selected disabled>Language</option>
+            <option value="Select" disabled selected>-- Select --</option>
             <option value="java">Java</option>
             <option value="python">Python</option>
             <option value="cpp">C++</option>
         </select>
         <label for="insertCode">Insert Code:</label>
         <textarea id="insertCode" placeholder="Write your code here..."></textarea>
-        <button>Detect Errors</button>
-        <div class="error"></div>
+        <button onclick="checkErrors()">Detect Errors</button>
+        <div id="error"></div>
     </div>
 </body>
 </html>

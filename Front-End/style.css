@@ -20,6 +20,10 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+option[value="Select"] {
+    color: #aaa;
+    opacity: 0.6;
+}
 label{
     display: flex;
     margin-left: 4px;
@@ -43,4 +47,9 @@ button {
 button:hover {
     cursor: pointer;
     filter: brightness(1.06);
+}
+#error {
+    margin-top: 15px;
+    color: red;
+    font-weight: bold;
 }
