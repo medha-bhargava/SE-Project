@@ -50,7 +50,7 @@ button {
     color: white;
     font-weight: bold;
     font-size: 15px;
-    background: linear-gradient(to bottom right, #0091ff, #d871fa, #f657ac);
+    background: linear-gradient(to bottom right, #0091ff, #d871fa, #fd48a9);
     /* background: linear-gradient(to bottom right, rgb(117, 211, 248), rgb(255, 173, 186)); */
     /* background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); */
     /* background: linear-gradient(to bottom right, #0096FF, #6363f6, #e35be3, #fa5fac, #f82c88); */
@@ -77,4 +77,16 @@ button:hover {
     margin-top: 15px;
     color: red;
     font-weight: bold;
+}
+.success-text {
+    color: green !important;
+    font-weight: bold;
+}
+.error-text {
+    color: red !important;
+    font-weight: bold;
+}
+.checking-text {
+    color: red !important;
+    font-style: italic;
 }
