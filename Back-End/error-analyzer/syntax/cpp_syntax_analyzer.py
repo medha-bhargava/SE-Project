@@ -22,7 +22,7 @@ class CppSyntaxAnalyzer(SyntaxAnalyzer):
                 for line in result.stderr.split("\n"):
                     match = re.search(r"(.*\.cpp):(\d+):(\d+): error: (.+)", line)
                     if match:
-                        error_list.append({"line": int(match.group(2)), "message": match.group(4)})
+                        error_list.append({"lineNumber": int(match.group(2)), "message": match.group(4)})
         finally:
             os.remove(temp_file_path)
         return error_list
