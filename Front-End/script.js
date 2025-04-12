@@ -42,17 +42,27 @@ function checkErrors() {
         return response.json();
     })
     .then(data => {
+        let outputText = "";
+        // Handle Syntax Errors
         if (data.hasSyntaxErrors) {
-            let errorsText = "Syntax Errors Detected:\n";
+            outputText += "Syntax Errors Detected:\n";
             data.syntaxErrors.forEach(error => {
-                errorsText += `🔴 Line ${error.lineNumber}: ${error.message}\n`;
+                outputText += `🔴 Line ${error.lineNumber}: ${error.message}\n`;
             });
-            errorOutput.innerText = errorsText;
-            errorOutput.className = "error-text";
         } else {
-            errorOutput.innerText = "✅ No Syntax Errors Detected!";
-            errorOutput.className = "success-text";
+            outputText += "✅ No Syntax Errors Detected!\n";
         }
+        // Handle Logical Errors
+        if (data.hasLogicalErrors) {
+            outputText += "Logical Errors Detected:\n";
+            data.logicalErrors.forEach(error => {
+                outputText += `🔴 Line ${error.lineNumber}: ${error.message}\n`;
+            });
+        } else {
+            outputText += "✅ No Logical Errors Detected!";
+        }
+        errorOutput.innerText = outputText;
+        errorOutput.className = (data.hasSyntaxErrors || data.hasLogicalErrors) ? "error-text" : "success-text";
     })
     .catch(error => {
         errorOutput.innerText = "❌ Error checking failed. Try again later.";
