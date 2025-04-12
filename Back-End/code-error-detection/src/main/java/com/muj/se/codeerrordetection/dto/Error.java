@@ -18,8 +18,11 @@ public class Error {
     private boolean hasSyntaxErrors;
 
     @JsonProperty("syntaxErrors")
-    private List<SyntaxError> syntaxErrorList;
+    private List<ErrorItem> syntaxErrorList;
 
-    @JsonProperty("hasSemanticErrors")
-    private boolean hasSemanticErrors;
+    @JsonProperty("hasLogicalErrors")
+    private boolean hasLogicalErrors;
+
+    @JsonProperty("logicalErrors")
+    private List<ErrorItem> logicalErrorList;
 }

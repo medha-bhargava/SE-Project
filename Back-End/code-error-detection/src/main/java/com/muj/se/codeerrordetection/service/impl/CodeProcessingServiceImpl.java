@@ -7,14 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muj.se.codeerrordetection.client.ErrorAnalyzerClient;
 import com.muj.se.codeerrordetection.dto.Code;
 import com.muj.se.codeerrordetection.dto.Error;
-import com.muj.se.codeerrordetection.dto.SyntaxError;
+import com.muj.se.codeerrordetection.dto.ErrorItem;
 import com.muj.se.codeerrordetection.service.CodeProcessingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,11 +48,21 @@ public class CodeProcessingServiceImpl implements CodeProcessingService {
         Error analyzedErrors;
         try {
             JsonNode rootNode = objectMapper.readTree(clientResponse);
+
+            // Fetch syntax errors as string
             String syntaxErrorsString = rootNode.get("syntax_errors").toString();
-            List<SyntaxError> syntaxErrorList = objectMapper.readValue(syntaxErrorsString, new TypeReference<>() {});
+            // Fetch logical errors as string
+            String logicalErrorsString = rootNode.get("logical_errors").toString();
+
+            // Obtain the list of syntax errors
+            List<ErrorItem> syntaxErrorList = objectMapper.readValue(syntaxErrorsString, new TypeReference<>() {});
             boolean hasSyntaxErrors = (syntaxErrorList != null && !syntaxErrorList.isEmpty());
-            boolean hasSemanticErrors = rootNode.get("semantic_errors").asBoolean();
-            analyzedErrors = new Error(hasSyntaxErrors, syntaxErrorList, hasSemanticErrors);
+
+            // Obtain the list of logical errors
+            List<ErrorItem> logicalErrorList = objectMapper.readValue(logicalErrorsString, new TypeReference<>() {});
+            boolean hasLogicalErrors = (logicalErrorList != null && !logicalErrorList.isEmpty());
+
+            analyzedErrors = new Error(hasSyntaxErrors, syntaxErrorList, hasLogicalErrors, logicalErrorList);
             System.out.println("Payload to be sent to UI: " +
                     objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(analyzedErrors));
         } catch (JsonProcessingException e) {

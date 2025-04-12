@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SyntaxError {
+public class ErrorItem {
 
     @JsonProperty("message")
     private String message;
