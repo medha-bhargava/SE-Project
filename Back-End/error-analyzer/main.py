@@ -3,6 +3,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from factory.syntax_analyzer_factory import SyntaxAnalyzerFactory
+from logical.logical_error_analyzer_impl import LogicalErrorAnalyzerClientImpl
 
 app = FastAPI()
 
@@ -19,13 +20,19 @@ async def detect_errors(request: Request):
         checker = SyntaxAnalyzerFactory.get_syntax_analyzer(language)
         syntax_errors = checker.check_syntax(code)
 
-        # Semantic Error Checking (Only if no syntax errors)
-        semantic_error = False
-        # if not syntax_errors:
-        #     semantic_error = semantic_checker.check_semantic_errors(request.code)
+        # Logical Error Checking
+        logical_error_checker = LogicalErrorAnalyzerClientImpl()
+        client_response: dict = await logical_error_checker.check_logical_errors(code_payload=payload)
+        if client_response.get("success", False):
+            logical_errors: list[dict] = client_response.get("result", {}).get("errors")
+            if len(logical_errors) > 0 and logical_errors[0].get("lineNumber") == -1:
+                logical_errors = []
+        else:
+            logical_errors = []
 
+        # Return the JSON response
         return JSONResponse(
-            content={"syntax_errors": syntax_errors, "semantic_errors": semantic_error},
+            content={"syntax_errors": syntax_errors, "logical_errors": logical_errors},
             status_code=200
         )
 
